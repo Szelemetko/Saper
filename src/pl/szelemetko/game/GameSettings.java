@@ -1,4 +1,4 @@
-package pl.szelemetko;
+package pl.szelemetko.game;
 
 public class GameSettings {
 

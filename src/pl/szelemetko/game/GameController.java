@@ -1,6 +1,9 @@
-package pl.szelemetko;
+package pl.szelemetko.game;
 
-import com.sun.org.apache.regexp.internal.RESyntaxException;
+import pl.szelemetko.gui.Board;
+import pl.szelemetko.gui.GUI;
+import pl.szelemetko.gui.GameTimer;
+import pl.szelemetko.gui.MineCounter;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 

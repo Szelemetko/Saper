@@ -1,4 +1,4 @@
-package pl.szelemetko;
+package pl.szelemetko.gui;
 
 import javax.swing.*;
 import java.awt.*;
@@ -7,8 +7,8 @@ import java.awt.event.MouseEvent;
 
 public class Field extends JButton {
 
-    private int x;
-    private int y;
+    private int xIndex;
+    private int yIndex;
     private boolean mine;
     private boolean marked;
     private boolean maybe;
@@ -17,9 +17,9 @@ public class Field extends JButton {
     private int markedAround = 0;
     private Board board;
 
-    public Field(int x, int y, Board board) {
-        this.x = x;
-        this.y = y;
+    public Field(int xIndex, int yIndex, Board board) {
+        this.xIndex = xIndex;
+        this.yIndex = yIndex;
         this.board = board;
         this.setBorder(BorderFactory.createRaisedBevelBorder());
         this.setSize(10, 10);
@@ -39,7 +39,7 @@ public class Field extends JButton {
 
     public void reveal() {
         if (this.revealed && (this.minesAround - this.markedAround == 0)) {
-            this.board.revealNeighbours(x, y);
+            this.board.revealNeighbours(xIndex, yIndex);
             return;
         }
         if (this.revealed || this.marked || this.maybe) {
@@ -99,7 +99,7 @@ public class Field extends JButton {
     void showEmpty() {
         this.setBorder(BorderFactory.createEtchedBorder());
         this.revealed = true;
-        this.board.revealNeighbours(this.x, this.y);
+        this.board.revealNeighbours(this.xIndex, this.yIndex);
     }
 
     public void mark() {
@@ -110,14 +110,14 @@ public class Field extends JButton {
             this.maybe = true;
             this.marked = false;
             this.setText("?");
-            this.board.removeMarkedNeighbour(x, y);
+            this.board.removeMarkedNeighbour(xIndex, yIndex);
         } else if (this.maybe) {
             this.maybe = false;
             this.setText("");
         } else {
             this.marked = true;
             this.setText("F");
-            this.board.addMarkedNeighbour(x, y);
+            this.board.addMarkedNeighbour(xIndex, yIndex);
         }
     }
 

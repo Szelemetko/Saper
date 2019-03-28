@@ -1,6 +1,6 @@
 package pl.szelemetko;
 
-import javax.swing.*;
+import pl.szelemetko.game.GameController;
 
 public class Saper {
 

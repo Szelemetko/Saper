@@ -1,4 +1,4 @@
-package pl.szelemetko;
+package pl.szelemetko.gui;
 
 import javax.swing.*;
 import java.util.concurrent.atomic.AtomicInteger;

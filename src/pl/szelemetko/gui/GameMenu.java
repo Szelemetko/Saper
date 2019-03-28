@@ -1,4 +1,7 @@
-package pl.szelemetko;
+package pl.szelemetko.gui;
+
+import pl.szelemetko.game.GameController;
+import pl.szelemetko.game.GameSettings;
 
 import javax.swing.*;
 

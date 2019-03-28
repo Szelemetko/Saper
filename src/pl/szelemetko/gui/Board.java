@@ -1,4 +1,6 @@
-package pl.szelemetko;
+package pl.szelemetko.gui;
+
+import pl.szelemetko.game.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -61,14 +63,13 @@ public class Board extends JPanel {
     }
 
     private void addMines(int mines) {
-        for (int i = 0; i < mines; i++) {
+        for (int i = 0; i < mines;) {
             int x = random.nextInt(boardHeight);
             int y = random.nextInt(boardWidth);
 
             if (!fields[x][y].hasMine()) {
                 fields[x][y].setMine(true);
-            } else {
-                i--;
+                i++;
             }
         }
 
