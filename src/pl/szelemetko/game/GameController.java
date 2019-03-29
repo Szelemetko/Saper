@@ -1,9 +1,6 @@
 package pl.szelemetko.game;
 
-import pl.szelemetko.gui.Board;
-import pl.szelemetko.gui.GUI;
-import pl.szelemetko.gui.GameTimer;
-import pl.szelemetko.gui.MineCounter;
+import pl.szelemetko.gui.*;
 
 /**
  * Klasa zarządzając grą Saper.
@@ -16,6 +13,7 @@ public class GameController {
     private GameTimer gameTimer;
     private MineCounter mineCounter;
     private boolean started = false;
+    private VictoryWindow victoryWindow;
 
     private GUI gui;
 
@@ -36,6 +34,9 @@ public class GameController {
     public void startGame() {
         this.started = true;
         this.gameTimer.start();
+        if(this.victoryWindow!=null) {
+            this.victoryWindow.dispose();
+        }
     }
 
     /**
@@ -49,6 +50,10 @@ public class GameController {
         this.mineCounter.setMinesToFind(this.gameSettings.getMines());
         this.board = new Board(this);
         this.gui.resetGUI(this.board);
+        if(this.victoryWindow!=null) {
+            this.victoryWindow.dispose();
+        }
+
     }
 
     /**
@@ -81,6 +86,7 @@ public class GameController {
         this.started = false;
         this.gameTimer.stop();
         this.board.disableFields();
+        this.victoryWindow = new VictoryWindow();
     }
 
 
@@ -144,4 +150,5 @@ public class GameController {
     public void setStarted(boolean started) {
         this.started = started;
     }
+
 }

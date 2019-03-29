@@ -23,7 +23,7 @@ public class GameTimer extends JLabel implements Runnable {
     @Override
     public void run() {
         this.time.set(0);
-        while(!Thread.currentThread().isInterrupted()) {
+        while (!Thread.currentThread().isInterrupted()) {
             this.setText(String.valueOf(time.getAndIncrement()));
             try {
                 Thread.sleep(1000);
@@ -45,7 +45,11 @@ public class GameTimer extends JLabel implements Runnable {
      * Zatrzymaj stoper.
      */
     public void stop() {
-        this.counterThread.interrupt();
+
+        if (this.counterThread != null) {
+            this.counterThread.interrupt();
+
+        }
     }
 
     /**

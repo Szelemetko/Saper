@@ -250,5 +250,7 @@ public class Board extends JPanel {
     public void removeFoundMine() {
         this.minesFound--;
     }
+
+
 }
 
