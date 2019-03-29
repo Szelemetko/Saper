@@ -6,26 +6,42 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
+/**
+ * Klasa będąca jednocześnie graficzną oraz logiczną reprezentacją planszy.
+ */
 public class Board extends JPanel {
 
     private GameController gameController;
     private int boardHeight;
     private int boardWidth;
     private int mines;
+    private int minesFound;
     private Field[][] fields;
     private Random random = new Random();
 
+    /**
+     * Tworzy nową tablicę i przekazuje jej kontroler gry, aby mogła wywoływać wydarzenia związane z grą, w reakcji na akcje gracza.
+     *
+     * @param gameController kontroler gry
+     */
     public Board(GameController gameController) {
         super();
         this.gameController = gameController;
         this.boardHeight = gameController.getGameSettings().getBoardHeight();
         this.boardWidth = gameController.getGameSettings().getBoardWidth();
         this.mines = gameController.getGameSettings().getMines();
+        this.minesFound = 0;
         this.setLayout(new GridLayout(this.boardHeight, this.boardWidth));
         this.setVisible(true);
         this.initBoard();
     }
 
+    /**
+     * Informuje sąsiednie pola, że pole na pozycji (x,y) zostało oznaczone przez gracza jako mina.
+     *
+     * @param x pozycja x pola
+     * @param y pozycja y pola
+     */
     public void addMarkedNeighbour(int x, int y) {
         int[] xToCheck = {x - 1, x, x + 1};
         int[] yToCheck = {y - 1, y, y + 1};
@@ -44,6 +60,12 @@ public class Board extends JPanel {
         }
     }
 
+    /**
+     * Informuje sąsiednie pola, że pole na pozycji (x,y) zostało odznaczone przez gracza jako mina.
+     *
+     * @param x pozycja x pola
+     * @param y pozycja y pola
+     */
     public void removeMarkedNeighbour(int x, int y) {
         int[] xToCheck = {x - 1, x, x + 1};
         int[] yToCheck = {y - 1, y, y + 1};
@@ -62,6 +84,10 @@ public class Board extends JPanel {
         }
     }
 
+    /**
+     * Dodaje miny, we wskazanej ilości do losowych pól na planszy.
+     * @param mines liczba min do dodania
+     */
     private void addMines(int mines) {
         for (int i = 0; i < mines;) {
             int x = random.nextInt(boardHeight);
@@ -80,6 +106,12 @@ public class Board extends JPanel {
         }
     }
 
+    /**
+     * Liczy miny w polach sąsiadujących z polem na pozycji (x,y).
+     * @param x pozycja x pola
+     * @param y pozycja y pola
+     * @return liczba min
+     */
     private int countNeighbouringMines(int x, int y) {
         int result = 0;
         int[] xToCheck = {x - 1, x, x + 1};
@@ -100,6 +132,9 @@ public class Board extends JPanel {
         return result;
     }
 
+    /**
+     * Odkrywa wszyetkie pola na planszy.
+     */
     public void revealAll() {
         for (int x = 0; x < this.boardHeight; x++) {
             for (int y = 0; y < this.boardWidth; y++) {
@@ -108,10 +143,23 @@ public class Board extends JPanel {
         }
     }
 
-    public void revealMines() {
+    /**
+     * Wyłącza możliwość wykonywania akcji na wszystkich polach planszy.
+     */
+    public void disableFields() {
         for (int x = 0; x < this.boardHeight; x++) {
             for (int y = 0; y < this.boardWidth; y++) {
                 fields[x][y].disableClicking();
+            }
+        }
+    }
+
+    /**
+     * Odkrywa wszysktie nieodkryte miny na planszy i oznacza te błędnie zaznaczone.
+     */
+    public void revealMines() {
+        for (int x = 0; x < this.boardHeight; x++) {
+            for (int y = 0; y < this.boardWidth; y++) {
                 if(fields[x][y].hasMine()) {
                     fields[x][y].reveal();
                 } else if (fields[x][y].isMarked() && !fields[x][y].hasMine()){
@@ -121,6 +169,11 @@ public class Board extends JPanel {
         }
     }
 
+    /**
+     * Odkrywa wszytkich pola sąsiadujące z polem na pozycji (x,y).
+     * @param x
+     * @param y
+     */
     public void revealNeighbours(int x, int y) {
         int[] xToCheck = {x - 1, x, x + 1};
         int[] yToCheck = {y - 1, y, y + 1};
@@ -139,11 +192,17 @@ public class Board extends JPanel {
         }
     }
 
-    public void initBoard() {
+    /**
+     * Inicjalizuje pola oraz dodaje miny do planszy.
+     */
+    private void initBoard() {
         populateBoard();
         addMines(mines);
     }
 
+    /**
+     * Wypełnia pustą planszę polami.
+     */
     private void populateBoard() {
         this.fields = new Field[this.boardHeight][this.boardWidth];
         for (int x = 0; x < this.boardHeight; x++) {
@@ -155,21 +214,41 @@ public class Board extends JPanel {
         }
     }
 
+    /**
+     * Pobierz liczbę wierszy planszy.
+     *
+     * @return liczba wierszy
+     */
     int getBoardHeight() {
         return boardHeight;
     }
 
-    public void setBoardHeight(int boardHeight) {
-        this.boardHeight = boardHeight;
-    }
 
+
+    /**
+     * Pobierz liczbę kolumn planszy
+     *
+     * @return liczba kolumn
+     */
     public int getBoardWidth() {
         return boardWidth;
     }
 
-    public void setBoardWidth(int boardWidth) {
-        this.boardWidth = boardWidth;
+    /**
+     * Zwiększ liczbę poprawnie oznaczonych min o 1.
+     */
+    public void addFoundMine() {
+        this.minesFound++;
+        if(minesFound == mines) {
+            this.gameController.winGame();
+        }
     }
 
+    /**
+     * Zmniejsz liczbę poprawnie oznaczonych min o 1.
+     */
+    public void removeFoundMine() {
+        this.minesFound--;
+    }
 }
 

@@ -5,10 +5,18 @@ import pl.szelemetko.game.GameSettings;
 
 import javax.swing.*;
 
+/**
+ * Klasa jest logiczną i graficzną reprezentacją menu gry.
+ */
 public class GameMenu extends JMenuBar {
 
-    GameController gameController;
+    private GameController gameController;
 
+    /**
+     * Stwórz menu gry.
+     *
+     * @param gameController kontroler gry.
+     */
     public GameMenu(GameController gameController) {
         super();
         this.gameController = gameController;

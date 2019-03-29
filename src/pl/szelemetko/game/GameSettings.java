@@ -1,15 +1,34 @@
 package pl.szelemetko.game;
 
+/**
+ * Klasa reprezentująca ustawienia gry, czyli wysokośc planszy, szerokość planszy oraz liczbę min na planszy.
+ */
 public class GameSettings {
 
+    /**
+     * Standardowe ustawienia gry na poziomie BEGINNER.
+     */
     public static GameSettings BEGINNER = new GameSettings(8,8,10);
+    /**
+     *  Standardowe ustawienia gry na poziomie ADVANCED.
+     */
     public static GameSettings ADVANCED = new GameSettings(16,16,40);
+    /**
+     *  Standardowe ustawienia gry na poziomie EXPERT.
+     */
     public static GameSettings EXPERT = new GameSettings(16,30,99);
 
     private int boardHeight;
     private int boardWidth;
     private int mines;
 
+    /**
+     * Stwórz nowy obiek typu GameSettings
+     *
+     * @param boardHeight wysokośc planszy
+     * @param boardWidth  szerokkość planszy
+     * @param mines       liczba min
+     */
     public GameSettings(int boardHeight, int boardWidth, int mines) {
 
         this.boardHeight = boardHeight;
@@ -18,28 +37,34 @@ public class GameSettings {
     }
 
 
+    /**
+     * Pobierz wysokość planszy.
+     *
+     * @return wysokość planszy
+     */
     public int getBoardHeight() {
         return boardHeight;
     }
 
-    public void setBoardHeight(int boardHeight) {
-        this.boardHeight = boardHeight;
-    }
 
+    /**
+     * Pobierz szerokość planszy.
+     *
+     * @return szerokość planszy
+     */
     public int getBoardWidth() {
         return boardWidth;
     }
 
-    public void setBoardWidth(int boardWidth) {
-        this.boardWidth = boardWidth;
-    }
 
+    /**
+     * Pobierz liczbę min.
+     *
+     * @return liczba min
+     */
     public int getMines() {
         return mines;
     }
 
-    public void setMines(int mines) {
-        this.mines = mines;
-    }
 
 }

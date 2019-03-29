@@ -9,8 +9,16 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * Okno aplikacji do ustawienia własnych ustawień gry.
+ */
 public class CustomeSettingsWindow extends JFrame {
 
+    /**
+     * Tworzy nowe okno do ustawienia własnych ustawień gry.
+     *
+     * @param gameController kontroler gry
+     */
     public CustomeSettingsWindow(GameController gameController) {
         super("Settings");
         this.setLayout(new GridLayout(4, 2));
@@ -25,6 +33,7 @@ public class CustomeSettingsWindow extends JFrame {
         this.add(mines);
         JButton save = new JButton("Save");
 
+        // stwórz nowe ustawienia i ustaw je dla gry po kliknięciu przycisku save
         ActionListener actionListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -44,7 +53,7 @@ public class CustomeSettingsWindow extends JFrame {
 
         save.addActionListener(actionListener);
         this.add(save);
-        this.setSize(300, 300);
+        this.setSize(200, 300);
         this.setResizable(false);
         this.setVisible(true);
     }
