@@ -8,7 +8,7 @@ public class ResetButton extends JButton {
     GameController gameController;
 
     public ResetButton(GameController gameController) {
-        super("New Game");
+        super("New");
         this.gameController = gameController;
         this.addActionListener(e -> gameController.resetGame());
     }

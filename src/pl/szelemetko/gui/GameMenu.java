@@ -32,10 +32,13 @@ public class GameMenu extends JMenuBar {
         advanced.addActionListener(e -> this.gameController.setGameSettings(GameSettings.ADVANCED));
         JMenuItem expert = new JMenuItem("Expert");
         expert.addActionListener(e -> this.gameController.setGameSettings(GameSettings.EXPERT));
+        JMenuItem custom = new JMenuItem("Custom");
+        custom.addActionListener(e -> new CustomeSettingsWindow(this.gameController));
 
         options.add(beginner);
         options.add(advanced);
         options.add(expert);
+        options.add(custom);
         this.add(options);
     }
 }

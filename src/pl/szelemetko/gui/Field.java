@@ -1,7 +1,10 @@
 package pl.szelemetko.gui;
 
+import pl.szelemetko.game.GameController;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -16,15 +19,18 @@ public class Field extends JButton {
     private int minesAround;
     private int markedAround = 0;
     private Board board;
+    private GameController gameController;
+    private MouseAdapter mouseAdapter;
 
-    public Field(int xIndex, int yIndex, Board board) {
+    public Field(int xIndex, int yIndex, Board board, GameController gameController) {
         this.xIndex = xIndex;
         this.yIndex = yIndex;
+        this.gameController = gameController;
         this.board = board;
         this.setBorder(BorderFactory.createRaisedBevelBorder());
         this.setSize(10, 10);
         this.setFocusPainted(false);
-        this.addMouseListener(new MouseAdapter() {
+        this.mouseAdapter = new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 if (SwingUtilities.isLeftMouseButton(e)) {
@@ -33,8 +39,13 @@ public class Field extends JButton {
                     mark();
                 }
             }
-        });
+        };
+        this.addMouseListener(this.mouseAdapter);
         this.setBackground(Color.LIGHT_GRAY);
+    }
+
+    public void disableClicking() {
+        this.removeMouseListener(this.mouseAdapter);
     }
 
     public void reveal() {
@@ -59,7 +70,7 @@ public class Field extends JButton {
         this.setBorder(BorderFactory.createEtchedBorder());
         this.setText("X");
         this.revealed = true;
-        this.board.revealMines();
+        this.gameController.loseGame();
     }
 
     void showNumber() {
@@ -102,6 +113,10 @@ public class Field extends JButton {
         this.board.revealNeighbours(this.xIndex, this.yIndex);
     }
 
+    public void showError() {
+        this.setBackground(Color.RED);
+    }
+
     public void mark() {
         if (this.revealed) {
             return;
@@ -116,7 +131,7 @@ public class Field extends JButton {
             this.setText("");
         } else {
             this.marked = true;
-            this.setText("F");
+            this.setText("M");
             this.board.addMarkedNeighbour(xIndex, yIndex);
         }
     }
@@ -168,4 +183,6 @@ public class Field extends JButton {
     public void decrementMarkedNeighbourCount() {
         this.markedAround--;
     }
+
+
 }

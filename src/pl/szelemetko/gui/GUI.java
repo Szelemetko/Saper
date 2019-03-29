@@ -12,6 +12,7 @@ public class GUI extends JFrame {
 
     public GUI(GameController gameController) {
         super("Saper");
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.board = gameController.getBoard();
         this.topBar = new TopBar(gameController.getGameTimer(), gameController.getMineCounter(), new ResetButton(gameController));
         this.menu = new GameMenu(gameController);
@@ -23,8 +24,9 @@ public class GUI extends JFrame {
         this.getContentPane().add(board, "Center");
         this.setSize(board.getBoardWidth() * 40,board.getBoardHeight() * 40);
         this.setJMenuBar(this.menu);
-        this.setVisible(true);
         this.setResizable(false);
+        this.setVisible(true);
+
     }
 
     public void resetGUI(Board board) {

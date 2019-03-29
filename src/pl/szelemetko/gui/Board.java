@@ -109,11 +109,13 @@ public class Board extends JPanel {
     }
 
     public void revealMines() {
-        this.gameController.endGame();
         for (int x = 0; x < this.boardHeight; x++) {
             for (int y = 0; y < this.boardWidth; y++) {
+                fields[x][y].disableClicking();
                 if(fields[x][y].hasMine()) {
                     fields[x][y].reveal();
+                } else if (fields[x][y].isMarked() && !fields[x][y].hasMine()){
+                    fields[x][y].showError();
                 }
             }
         }
@@ -146,7 +148,7 @@ public class Board extends JPanel {
         this.fields = new Field[this.boardHeight][this.boardWidth];
         for (int x = 0; x < this.boardHeight; x++) {
             for (int y = 0; y < this.boardWidth; y++) {
-                Field field = new Field(x,y, this);
+                Field field = new Field(x,y, this, this.gameController);
                 fields[x][y] = field;
                 this.add(field);
             }

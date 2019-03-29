@@ -47,8 +47,9 @@ public class GameController {
         resetGame();
     }
 
-    public void endGame() {
+    public void loseGame() {
         this.counterThread.interrupt();
+        this.board.revealMines();
     }
 
     public void revealBoard(){
