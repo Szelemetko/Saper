@@ -1,6 +1,6 @@
-package pl.szelemetko.gui;
+package pl.szelemetko.saper.gui;
 
-import pl.szelemetko.game.GameController;
+import pl.szelemetko.saper.game.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,7 +15,8 @@ public class Board extends JPanel {
     private int boardHeight;
     private int boardWidth;
     private int mines;
-    private int minesFound;
+    private int minesFound = 0;
+    private int minesIncorrect = 0;
     private Field[][] fields;
     private Random random = new Random();
 
@@ -30,7 +31,6 @@ public class Board extends JPanel {
         this.boardHeight = gameController.getGameSettings().getBoardHeight();
         this.boardWidth = gameController.getGameSettings().getBoardWidth();
         this.mines = gameController.getGameSettings().getMines();
-        this.minesFound = 0;
         this.setLayout(new GridLayout(this.boardHeight, this.boardWidth));
         this.setVisible(true);
         this.initBoard();
@@ -239,7 +239,7 @@ public class Board extends JPanel {
      */
     public void addFoundMine() {
         this.minesFound++;
-        if(minesFound == mines) {
+        if(minesFound == mines  && minesIncorrect==0) {
             this.gameController.winGame();
         }
     }
@@ -249,6 +249,24 @@ public class Board extends JPanel {
      */
     public void removeFoundMine() {
         this.minesFound--;
+    }
+
+    /**
+     * Zwiększ liczbę poprawnie oznaczonych min o 1.
+     */
+    public void addIncorrectMine() {
+        this.minesIncorrect++;
+
+    }
+
+    /**
+     * Zmniejsz liczbę poprawnie oznaczonych min o 1.
+     */
+    public void removeIncorrectMine() {
+        this.minesIncorrect--;
+        if(minesFound == mines && minesIncorrect==0) {
+            this.gameController.winGame();
+        }
     }
 
 

@@ -1,6 +1,6 @@
-package pl.szelemetko;
+package pl.szelemetko.saper;
 
-import pl.szelemetko.game.GameController;
+import pl.szelemetko.saper.game.GameController;
 
 /**
  * Główna klasa gry saper.

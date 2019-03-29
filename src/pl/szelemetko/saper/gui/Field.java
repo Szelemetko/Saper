@@ -1,6 +1,6 @@
-package pl.szelemetko.gui;
+package pl.szelemetko.saper.gui;
 
-import pl.szelemetko.game.GameController;
+import pl.szelemetko.saper.game.GameController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -161,6 +161,8 @@ public class Field extends JButton {
             this.setText("?");
             if(this.mine) {
                 this.board.removeFoundMine();
+            } else {
+                this.board.removeIncorrectMine();
             }
             this.board.removeMarkedNeighbour(xIndex, yIndex);
         } else if (this.maybe) {
@@ -171,6 +173,8 @@ public class Field extends JButton {
             this.setText("M");
             if(this.mine) {
                 this.board.addFoundMine();
+            } else {
+                this.board.addIncorrectMine();
             }
             this.board.addMarkedNeighbour(xIndex, yIndex);
         }

@@ -1,6 +1,6 @@
-package pl.szelemetko.game;
+package pl.szelemetko.saper.game;
 
-import pl.szelemetko.gui.*;
+import pl.szelemetko.saper.gui.*;
 
 /**
  * Klasa zarządzając grą Saper.

@@ -1,7 +1,7 @@
-package pl.szelemetko.gui;
+package pl.szelemetko.saper.gui;
 
-import pl.szelemetko.game.GameController;
-import pl.szelemetko.game.GameSettings;
+import pl.szelemetko.saper.game.GameController;
+import pl.szelemetko.saper.game.GameSettings;
 
 import javax.swing.*;
 

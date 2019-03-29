@@ -1,4 +1,4 @@
-package pl.szelemetko.gui;
+package pl.szelemetko.saper.gui;
 
 import javax.swing.*;
 import java.awt.*;

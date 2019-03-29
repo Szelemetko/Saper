@@ -1,4 +1,4 @@
-package pl.szelemetko.game;
+package pl.szelemetko.saper.game;
 
 /**
  * Klasa reprezentująca ustawienia gry, czyli wysokośc planszy, szerokość planszy oraz liczbę min na planszy.
