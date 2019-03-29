@@ -8,15 +8,15 @@ public class GameSettings {
     /**
      * Standardowe ustawienia gry na poziomie BEGINNER.
      */
-    public static GameSettings BEGINNER = new GameSettings(8,8,10);
+    public static final GameSettings BEGINNER = new GameSettings(8,8,10);
     /**
      *  Standardowe ustawienia gry na poziomie ADVANCED.
      */
-    public static GameSettings ADVANCED = new GameSettings(16,16,40);
+    public static final GameSettings ADVANCED = new GameSettings(16,16,40);
     /**
      *  Standardowe ustawienia gry na poziomie EXPERT.
      */
-    public static GameSettings EXPERT = new GameSettings(16,30,99);
+    public static final GameSettings EXPERT = new GameSettings(16,30,99);
 
     private int boardHeight;
     private int boardWidth;
